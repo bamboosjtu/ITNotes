@@ -5,7 +5,11 @@
 2. v-directives
 3. Vue实例
 4. Vue-CLI与Webpack
-5. Vue组件及数据交换和信号传递
+5. Vue组件及数据交换和信号传递：组件的分类
+    - 接入型 container
+    - 展示型
+    - 交互型 比如各类加强版的表单组件，通常强调复用
+    - 功能型 比如 `<router-view>`，`<transition>`，作为一种扩展、抽象机制存在。
 7. v-model与表单控件
 8. 自定义v-directives
 9. filters
@@ -32,6 +36,6 @@
 9. Custom Directives
 10. Custom Filters
 11. Custom Minxins
-12. Ajax
+12. Ajax & Fireb ase
 13. VueX & Authentication
 14. Form Input Validition
