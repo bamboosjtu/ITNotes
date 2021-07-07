@@ -16,13 +16,15 @@
 10. mixins
 11. animations(css/js)与transition
 
+
 ## 二、Vue常用插件
 - vue-resource/ajax
 - vue-router
 - vuex
 - vuetify
 - element-ui
-- animate css
+- animate css 
+
 
 ## 三、Vue案例实操
 1. Output
@@ -36,6 +38,6 @@
 9. Custom Directives
 10. Custom Filters
 11. Custom Minxins
-12. Ajax & Fireb ase
-13. VueX & Authentication
+12. Ajax & Firebase
+13. VueX & Authentication with token
 14. Form Input Validition
