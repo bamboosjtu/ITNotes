@@ -1,4 +1,4 @@
-# Vue 知识体系
+# Vue简介
 
 ## 一、Vue基础语法
 1. Vue.js与DOM渲染
@@ -40,4 +40,4 @@
 11. Custom Minxins
 12. Ajax & Firebase
 13. VueX & Authentication with token
-14. Form Input Validition
+14. Vuelidate & Form Input Validition
