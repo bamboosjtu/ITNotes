@@ -271,9 +271,9 @@ Django的中间件在前端/后端之前被调用，而且会用于所有的请�
 `MiddlewareMixin`的接口按顺序包括：
 1. `process_request(self, request)`：返回None才会执行后续的方法和中间件，返回HttpResonse则不会。
 2. `process_view(self, request, func, *args, **kwargs)`
-3. `process_exception(self, request, exception)`
+3. `process_exception(self, request, exception)`：视图层业务处理或者模板层渲染发生异常时才会调用。
 4. `process_template_response(self, request, response)`：使用了模板才会调用。
-5. `process_response(self, request, response)`：视图层业务处理或者模板层渲染发生异常时才会调用。
+5. `process_response(self, request, response)`
 
 `process_response`似乎一定会被调用，但`process_view`等则不一定，例如不涉及业务处理，仅仅刷新页面的时候。
 
