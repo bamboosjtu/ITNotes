@@ -10,6 +10,7 @@
 * [Node.js](./Node/README.md)
 * [Django](./Django/README.md)
     * [QuickStart](./Django/Quickstart.md) 
+    * [Django Model](./Django/Model.md)
     * [Reference](./Django/Reference.md)
     * [附录A：环境配置](./Django/Django_环境配置.md)
     * [附录B：工具软件](./Django/Django_工具软件.md)
