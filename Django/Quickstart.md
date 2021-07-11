@@ -7,6 +7,7 @@ pip install pipenv
 pipenv shell
 pipenv install django
 pipenv install djangorestframework
+pipenv install python-dotenv
 
 django-admin startproject siteconfig .
 python manage.py startapp student
@@ -45,12 +46,10 @@ Django默认使用sqlite3数据库，但实际工程环境一般使用mysql或�
 安装完成mysql后，还需要在项目文件做如下配置，以使用MySQL数据库为例：
 - 安装所需的包，需要安装`pymysql`和`cryptography`
 
-
 - 修改`settings.py`的数据库配置
-
 ```python
-with open(os.path.join(BASE_DIR, 'siteconfig/MYSQL_PASSWORD.env')) as f:
-    MYSQL_PASSWORD = f.read()
+load_dotenv(os.path.join(BASE_DIR, 'siteconfig/settings/.env'))
+MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD')
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
@@ -68,7 +67,6 @@ DATABASES = {
 ```
 
 - 修改应用的`__init__.py`文件
-
 ```python
 import pymysql
 
@@ -79,6 +77,11 @@ pymysql.install_as_MySQLdb()
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+```
+
+- 操作数据库
+```bash
+python manage.py dbshell
 ```
 
 
