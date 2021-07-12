@@ -3,6 +3,19 @@
 Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，window和documenti其实都是浏览器提供的API，但Node.js基于V8引擎可以运行在操作系统上，而且有很多Core和第三方库，可以用作服务端语言。
 
 
+## 核心库
+
+### 全局对象
+- global
+- process
+- Buffer
+
+
+### 网络模块
+- socket
+- stream
+
+
 
 ## 第三方库
 
