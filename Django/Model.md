@@ -57,15 +57,56 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 | unique_for_month | |
 | unique_for_year | |
 | verbose_name | 后台显示名称 |
-| validators | 自定义校验逻辑 |
+| validators | 自定义校验逻辑，仅用于form |
 
 
 
 ## 二、模型
+
+### （一）Model
 一个模型对应一张数据库表，`django.db.models.Model`的内部类`Meta`用于配置模型或者表。
 
 - `ordering`：排序的字段。
 - `verbose_name`、`verbose_name_plural`，在后台显示的模型名称。
+- `unique_together`
+- `db_table`：对应的数据库表，默认为`<app_name>_<model_name>`
+- `abstract`
+
+Django提供了抽象类的功能。
+
+### （二）Model Manager
+
+```mermaid
+graph LR
+DB_VALUE --> ModelManger((QuerySet.filter)) --> USER_FACING_VALUE
+```
+
+
+继承自`django.db.models.Manager`类，可作为数据在数据库与用户之间的转换，通过模型的`objects`字段配置。一般与自定义的`QuerySet`配合使用。
+
+
+```python
+class ProductQuerySet(models.QuerySet):
+  def published(self):
+    now = timezone.now()
+    return self.filter(state=Product.ProductStateOptions.PUBLISH)
+
+
+class ProductManager(models.Manager):
+  def get_queryset(self):
+    return ProductQuerySet(self.model, using=self._db)
+
+  def published(self):
+    # Product.objects.published()
+    # Product.objects.filter(title__icontains='Title').pushlished()
+    return self.get_queryset().published()
+
+
+class Product(models.Model):
+  ...
+  objects = ProductManager()
+  ...
+```
 
 
 
