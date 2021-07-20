@@ -146,3 +146,12 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - aggregate：直接计算结果。
 
 - raw：原生SQL接口
+
+
+## 四、字段验证（validators）
+
+一般应用目录下的`validators.py`用于模型字段有效的检测。
+
+- 定义字段时，设置validators参数
+- 覆写模型的`clean`函数
+- 覆写模型的`save`函数，仅本方法对`shell`操作有效
