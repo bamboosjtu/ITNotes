@@ -140,7 +140,7 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - bluk_create
 - in_buld
 - values
-- values_list
+- values_list：查看查询结果列表
 
 
 ### （三）查询操作符
