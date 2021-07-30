@@ -57,8 +57,15 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 | unique_for_month | |
 | unique_for_year | |
 | verbose_name | 后台显示名称 |
-| validators | 自定义校验逻辑，仅用于form |
+| **validators** | 设置校验逻辑，仅用于form。 |
 
+
+### （三）字段验证
+模型字段中`validators`参数仅用于form，无法校验shell输入的记录。
+
+- built-in：`django.core.validators`
+
+- 用户自定义
 
 
 ## 二、模型

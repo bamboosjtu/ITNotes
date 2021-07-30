@@ -22,3 +22,4 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [nodemon](https://www.npmjs.com/package/nodemon)：自动检测源代码变化并重启node服务。
 - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
 - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
+- [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
