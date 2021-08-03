@@ -8,13 +8,32 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 ### 全局对象
 - global
 - process
+
+
+### 内置类型
 - Buffer
+- EventEmitter
+- Promise(deprecated) -> `last call functionality`
 
 
-### 网络模块
-- socket
-- stream
-
+### 核心模块
+- 网络通信
+    - stream
+    - socket
+    - dgram：UDP
+    - net：TCP
+    - http：HTTP
+- 域名解析和URL处理
+    - dns
+    - url
+    - querystring
+- 实用工具
+    - util
+- 进程模块
+    - child_process
+- 程序控制
+    - step
+    - async
 
 
 ## 第三方库
@@ -23,3 +42,18 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
 - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
 - [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
+
+
+## 异步模式
+异步模块有`step`和`async`，异步处理模式包括：
+
+- waterfall
+- series
+- parallel
+- queue
+- whilst
+- until
+- auto
+- iterator
+- apply
+- nextTick
