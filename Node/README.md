@@ -15,7 +15,7 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - EventEmitter
 - Promise(deprecated) -> `last call functionality`
 
-
+ 
 ### 核心模块
 - 网络通信
     - stream
@@ -42,6 +42,7 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
 - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
 - [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
+- [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
 
 
 ## 异步模式
