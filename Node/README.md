@@ -45,6 +45,7 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
 
 
+
 ## 中间件
 - [Connect](https://github.com/senchalabs/connect)：一个web中间件框架，集成了至少20个中间件。
     - connect.favicon
@@ -55,7 +56,6 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [JSGI](http://wiki.commonjs.org/wiki/JSGI)
 - [Crossroads](https://millermedeiros.github.io/crossroads.js/)：路由重定向。
 - [http-proxy](https://www.npmjs.com/package/http-proxy)：转发及反向代理。
-
 
 
 ## 异步模式

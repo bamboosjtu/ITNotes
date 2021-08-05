@@ -1,7 +1,10 @@
 # ITNotes
 
 ## Web
-- 前端
+### 前端
     - Vue.js
-- 后端
-    - Django
+
+
+### 后端
+    - Django(Python)
+    - Express(Node)
