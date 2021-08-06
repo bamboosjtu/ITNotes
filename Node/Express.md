@@ -76,8 +76,11 @@ app.get('/about', (req, res) => {
  ```
 
 
-- jade
+- Jade：`Express`默认的模板系统。
 
+- EJS（Embeded Javascript）：基于`Ruby EJB`的模板系统
+
+模板引擎除了`tag`语法外，一般还包括`filter`等功能。
 
 
 ## 其他框架

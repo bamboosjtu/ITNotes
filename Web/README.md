@@ -7,6 +7,7 @@
     - SVG
     - WebGL
 - CSS & CSS3
+    - [Stylus](https://github.com/stylus/stylus)：动态生成CSS样式文件。
 - Javscript & ES6 & TypeScript
 
 ### 框架篇
