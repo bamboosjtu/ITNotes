@@ -42,7 +42,11 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
 - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
 - [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
+
+### 网络
 - [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
+
+### 数据库
 - [mongodb](https://mongodb.github.io/node-mongodb-native/)：文档数据库Mongodb的官方驱动API。
 - [mongoose](https://mongoosejs.com/)：文档数据库Mongodb的ORM库。
 

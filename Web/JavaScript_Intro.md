@@ -1,7 +1,16 @@
 # JavaScript简介
 
-## 常用的第三方库
 
+## 内置类型
+
+### Promise
+- [MDN 使用Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises)
+- [阮一峰 Promise对象](https://javascript.ruanyifeng.com/advanced/promise.html)
+- [菜鸟教程 JavaScript Primise](https://www.runoob.com/js/js-promise.html)
+- [菜鸟教程 JavaScript Promise 对象](https://www.runoob.com/w3cnote/javascript-promise-object.html)
+
+
+## 常用的第三方库
 - jQuery：屏蔽了浏览器对DOM API实现的差异性，提供了更加简单的Ajax API。
 - [Moment.js](https://momentjs.com/)：功能强大的日期类库，有两个版本：一种支持时区，一种不支持。
 - [Numberal.js](http://numeraljs.com/)：格式化数字。
@@ -9,7 +18,6 @@
 
 
 ## 服务端编程
-
 服务端编程常用Node。常规的JS一般运行在浏览器中，Node使用v8引擎编译后，可以运行在服务器上。
 
 ### 服务端框架
@@ -17,9 +25,7 @@
 - Koa
 
 
-
 ## 用户端编程
-
 - 请求服务端数据
 ```js
 fetch(ENDPOINT).then((response) => {
