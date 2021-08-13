@@ -74,6 +74,14 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - hiredis：非阻塞的，可以提高性能
 
 
+#### 关系型数据库
+- db-mysql：不支持事务操作
+- node-mysql：不支持事务操作
+    - mysql-queues：提供多重查询和数据库事务支持
+- sequelize：提供ORM支持，但不支持事务
+
+
+
 ### 安全&认证
 - bcryptjs：加密用户密码。
 - jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
@@ -81,8 +89,9 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 
 ## 中间件
 ```mermaid
-graph LR;
-    A[new request]-->B[do something]-->C[run route handler];
+graph LR
+    A[new request] --> B[do something]
+    B --> C[run route handler];
 ```
 
 
