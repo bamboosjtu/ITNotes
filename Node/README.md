@@ -5,77 +5,80 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 
 ## 核心库
 
-- 全局对象
-    - global
-    - process
+### 全局对象
+- global
+- process
+- console
 
-- 内置类型
-    - Buffer
-    - EventEmitter
-    - Promise(deprecated) -> await & async
+### 重要类型
+- Buffer
+- EventEmitter
+- Promise(deprecated) -> await & async
 
-- 异步模式：异步模块有`step`和`async`，异步处理模式包括：
-    - waterfall
-    - series
-    - parallel
-    - queue
-    - whilst
-    - until
-    - auto
-    - iterator
-    - apply
-    - nextTick
+### 进程和异步
 
- 
-### 网络
-- stream
-- socket
-- dgram：UDP
-- net：TCP
-- http：HTTP
-
-### 域名&URL
-- dns
-- url
-- querystring
-
-### 实用工具
-- util
-
-### 进程
+工具模块包括：
 - child_process
-
-### 异步
 - step
 - async
 
+异步处理模式包括：
+- waterfall
+- series
+- parallel
+- queue
+- whilst
+- until
+- auto
+- iterator
+- apply
+- nextTick
+
+### 工具模块
+- 网络通信
+  - stream
+  - socket
+  - dgram：UDP
+  - net：TCP
+  - http：HTTP
+  - [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
+
+- WEB工具
+  - dns
+  - url
+  - querystring
+
+- 实用工具
+  - util：包含`format`、`inspect`、`inherits`等实用函数。
+  - underscore
+  - lodash
+  - [nodemon](https://www.npmjs.com/package/nodemon)：自动检测源代码变化并重启node服务。
+  - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
+  - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
+  - repl
+  
+- 命令行
+  - [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
+  - commander
+
+- 安全&认证
+  - bcryptjs：加密用户密码。
+  - jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
 
 
-## 第三方库
+## 数据库
 
-- [nodemon](https://www.npmjs.com/package/nodemon)：自动检测源代码变化并重启node服务。
-- [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
-- [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
-- [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
-
-
-### 网络
-- [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
-
-
-### 数据库
-
-#### 文档数据库
+### 文档数据库
 - [mongodb](https://mongodb.github.io/node-mongodb-native/)：文档数据库Mongodb的官方驱动API。
 - [mongoose](https://mongoosejs.com/)：文档数据库Mongodb的ORM库，并提供了数据验证的中间件。
 
 
-#### K-V数据库
+### K-V数据库
 - redis
 - hiredis：非阻塞的，可以提高性能
 
 
-#### 关系型数据库
+### 关系型数据库
 - db-mysql：不支持事务操作
 - node-mysql：不支持事务操作
     - mysql-queues：提供多重查询和数据库事务支持
@@ -83,18 +86,12 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 
 
 
-### 安全&认证
-- bcryptjs：加密用户密码。
-- jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
-
-
-## 中间件
+## WEB中间件
 ```mermaid
 graph LR
     A[new request] --> B[do something]
     B --> C[run route handler];
 ```
-
 
 - [Connect](https://github.com/senchalabs/connect)：一个web中间件框架，集成了至少20个中间件。
     - connect.favicon
@@ -107,7 +104,7 @@ graph LR
 - [http-proxy](https://www.npmjs.com/package/http-proxy)：转发及反向代理。
 
 
-## 框架
+### 框架
 - [Express](./Express.md)：一个WEB框架，与`Connect`是同一个作者，框架本身提供了路由等中间件，用户也可以自定义中间件`(req, res, next) => {}`。
 
 
