@@ -108,3 +108,36 @@ graph LR
 - [Express](./Express.md)：一个WEB框架，与`Connect`是同一个作者，框架本身提供了路由等中间件，用户也可以自定义中间件`(req, res, next) => {}`。
 
 
+
+## 多媒体
+Node操作图形程序和音视频，一是可以通过子进程访问操作系统工具，此方法对windows平台支持较差，二是直接使用模块。
+
+### PDF
+- PDF工具
+  - `PDF Toolkit`：分解、合并PDF文档，填写PDF表单，加水印，旋转页面，压缩与解压，修改文档。
+  - `wkhtmltopdf`：通过WebKit渲染机制将HTML转换为PDF文件，实现对网页的截屏。
+
+- PDF模块
+  - `pdfkit`：`coffeescript`编写的，提供了创建PDF文档，添加页面，组织文本和图形以及嵌入图片的功能。未来还会有PDF提纲、渐变、表格以及其他特性。
+
+
+### 邮件
+- `Emailjs`：提供一个简易的邮件服务器。
+
+
+### 图形
+- 图形工具
+  - `ImageMagick`：命令行图形工具，制作动画、裁剪尺寸。
+
+- 图形模块
+  - `imagemadick`：提供了对`ImageMagick`功能的封装。
+
+
+### 视频
+包含HTML5 video的程序需要使用`Connect`模块的静态网络服务器，无法使用自制Web服务器，因为自制Web服务器无法处理HTTP ranges。
+
+
+### Canvas
+HTML5的元素。
+
+- cancas：基于`Cario`的向量图形库。
