@@ -66,7 +66,6 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
   - bcryptjs：加密用户密码。
   - jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
 
-
 - 多媒体：Node操作图形程序和音视频，一是可以通过子进程访问操作系统工具，此方法对windows平台支持较差，二是直接使用模块。
   - PDF
     - PDF Toolkit工具：分解、合并PDF文档，填写PDF表单，加水印，旋转页面，压缩与解压，修改文档。
@@ -125,8 +124,16 @@ graph LR
 
 
 
+## 网络通信
+WebSockets：一种Web技术，可以在客户端与服务器之间建立直接的实时双向通信，但不是所有的浏览器都支持。
+
+`Socket.IO`通过灵活采用不同机制（WebSockets、Adobe Flash Socket、Ajax long polling、Ajax multipart streaming、Forever iFrame for IE、JSONP Polling），使得浏览器与服务器之间可以建立双向通信，npm模块官网[见此](https://www.npmjs.com/package/socket.io)。编写代码时，服务器与客户端之间相互触发事件。
+
+
+
 ## 测试
 - [Jest](https://jestjs.io)
 - [MOCHA](https://mochajs.org)
 - [`supertest`](https://www.npmjs.com/package/supertest)：一个WEB测试框架，既可以单独使用，也可以配合其他框架使用。
+
 
