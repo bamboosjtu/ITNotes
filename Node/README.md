@@ -62,9 +62,6 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - 环境变量
   - [env-cmd](https://www.npmjs.com/package/env-cmd)：通过`.env`文件管理配置开发/生产/测试环境，在`package.json`文件中配置。
 
-- 安全&认证
-  - bcryptjs：加密用户密码。
-  - jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
 
 - 多媒体：Node操作图形程序和音视频，一是可以通过子进程访问操作系统工具，此方法对windows平台支持较差，二是直接使用模块。
   - PDF
@@ -132,8 +129,58 @@ WebSockets：一种Web技术，可以在客户端与服务器之间建立直接�
 
 
 ## 测试
+### 测试框架
 - [Jest](https://jestjs.io)
 - [MOCHA](https://mochajs.org)
+- Jasmine：测试文件结尾必须以*spec.js*结尾。
+- Vows
+
+
+### 测试模块
 - [`supertest`](https://www.npmjs.com/package/supertest)：一个WEB测试框架，既可以单独使用，也可以配合其他框架使用。
+- node-inspector
+- assert
+- nodeunit
 
 
+### 集成测试
+- Soda：与Selenium配合。
+- Zombie：创建浏览器并模拟用户对浏览器的操作。
+
+
+### 性能测试
+- ApacheBench
+- Nodeload
+
+
+
+## 安全防护
+### 加密（encryption）
+确保互联网传输数据的安全性，即使在传输过程中被截获，也无法对数据解密。此外，需要保密存储的数据也可以加密。
+
+- crypto：依赖OpenSSL提供的底层平台。
+- bcryptjs：加密用户密码。
+- OpenSSL工具。
+
+
+### 身份验证（authentication）和授权（authorization）
+在需要访问应用程序的某些保护区域时，需要先进行登录操作，并且确保这个人就是自己描述的那个人。
+
+- jsonwebtoken：根据用户身份提供经过**非对称加密**和**base64编码**的token。
+- passport：`passport-twitter`模块提供了和twitter账户绑定的OAuth服务。
+
+认证机制：
+- OAuth：无需直接使用用户密码九可以访问数据，主要用数据访问的授权。
+- OpenID：主要关注用户身份验证，可以解决用户多地注册的方案。
+
+
+### 沙箱（sandboxing）
+隔离脚本，使其只能在一个有限的上下文环境中运行，而不能访问系统资源。
+
+- vm
+
+
+### 攻击防范（attack prevention）
+确保用户提交的表单数据不能包含可以攻击服务器或者数据库的文本信息。
+
+- node-validator
