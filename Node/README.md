@@ -9,10 +9,12 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - process
 - console
 
+
 ### 重要类型
 - Buffer
 - EventEmitter
 - Promise(deprecated) -> await & async
+
 
 ### 进程和异步
 工具模块包括：
@@ -32,19 +34,8 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 - apply
 - nextTick
 
-### 工具模块
-- 网络通信
-  - stream
-  - socket
-  - dgram：UDP
-  - net：TCP
-  - http：HTTP
-  - [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
 
-- WEB工具
-  - dns
-  - url
-  - querystring
+### 工具模块
 
 - 实用工具
   - util：包含`format`、`inspect`、`inherits`等实用函数。
@@ -54,13 +45,23 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
   - [validator](https://www.npmjs.com/package/validator)：检查字符串格式。
   - [chalk](https://www.npmjs.com/package/chalk)：为字符串输出添加颜色。
   - repl
+
   
 - 命令行
   - [yargs](https://www.npmjs.com/package/yargs)：处理命令行参数。
   - commander
 
+
 - 环境变量
   - [env-cmd](https://www.npmjs.com/package/env-cmd)：通过`.env`文件管理配置开发/生产/测试环境，在`package.json`文件中配置。
+
+  
+- 本地系统
+  - os：操作系统信息
+  - path：文件系统路径相关
+  - fs：文件读写
+  - stat-mode：获取文件权限信息
+  - zlib：支持*zlib*、*deflate*等压缩算法。
 
 
 - 多媒体：Node操作图形程序和音视频，一是可以通过子进程访问操作系统工具，此方法对windows平台支持较差，二是直接使用模块。
@@ -75,6 +76,7 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
     - `imagemadick`：提供了对`ImageMagick`功能的封装；
     - `sharp`：提供图片压缩、格式转换等功能。
   - 视频：包含HTML5 video的程序需要使用`Connect`模块的静态网络服务器，无法使用自制Web服务器，因为自制Web服务器无法处理HTTP ranges。
+    - mime：用于播放视频，可以返回恰当的MIME类型。
   - 邮件
     - [SendGrid服务](htt[s://www.sendgrid.com])：第三方邮件服务
     - `Emailjs`：提供一个简易的邮件服务器。
@@ -109,6 +111,7 @@ graph LR
     B --> C[run route handler];
 ```
 
+常用的WEB中间件有：
 - [Connect](https://github.com/senchalabs/connect)：一个web中间件框架，集成了至少20个中间件。
   - connect.favicon
   - connect.logger
@@ -120,12 +123,26 @@ graph LR
 - [http-proxy](https://www.npmjs.com/package/http-proxy)：转发及反向代理。
 
 
+常用模块有：
+- dns：提供DNS解析功能。
+- url：提供URL解析功能。
+- querystring：提供URL查询参数解析功能。
+
+
 
 ## 网络通信
 WebSockets：一种Web技术，可以在客户端与服务器之间建立直接的实时双向通信，但不是所有的浏览器都支持。
 
-`Socket.IO`通过灵活采用不同机制（WebSockets、Adobe Flash Socket、Ajax long polling、Ajax multipart streaming、Forever iFrame for IE、JSONP Polling），使得浏览器与服务器之间可以建立双向通信，npm模块官网[见此](https://www.npmjs.com/package/socket.io)。编写代码时，服务器与客户端之间相互触发事件。
+[`Socket.IO`](http://socket.io/)：一个双全工socket框架，通过灵活采用不同机制（WebSockets、Adobe Flash Socket、Ajax long polling、Ajax multipart streaming、Forever iFrame for IE、JSONP Polling），使得浏览器与服务器之间可以建立双向通信，npm模块官网[见此](https://www.npmjs.com/package/socket.io)。编写代码时，服务器与客户端之间相互触发事件。
 
+网络通信相关模块，包括TCP、UDP、TLS等。TCP服务既可以绑定*网络端口*，也可以绑定*UNIX套接字*。
+
+- dgram：提供UDP服务器。
+- net：提供TCP服务器。
+- https：提供HTTPS服务，使用证书、SSL功能。
+- [request](https://www.npmjs.com/package/request)：**deprecated**，支持HTTP协议的客户端。
+- stream
+- socket
 
 
 ## 测试
