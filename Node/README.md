@@ -13,7 +13,8 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 ### 重要类型
 - Buffer
 - EventEmitter
-- Promise(deprecated) -> await & async
+- Promise(deprecated) -> await & async，`Promise`现在是ES6的一部分：
+  - `Bluebird`：提供promise功能
 
 
 ### 进程和异步
@@ -88,11 +89,19 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 ## 数据库
 ### 文档数据库
 - [mongodb](https://mongodb.github.io/node-mongodb-native/)：文档数据库Mongodb的官方驱动API。
-- [mongoose](https://mongoosejs.com/)：文档数据库Mongodb的ORM库，并提供了数据验证的中间件。
+  - [mongoose](https://mongoosejs.com/)：文档数据库Mongodb的ORM库，并提供了数据验证的中间件。
+- CouchDB：Apache维护。
+- SimpleDB：Amazon维护。
+- RavenDB：Amazon维护。
+- Lotus Notes
+
 
 ### K-V数据库
-- redis
-- hiredis：非阻塞的，可以提高性能
+- redis：只能单机，但可以持久化，支持Hash、队列、集合等数据结构。
+  - hiredis：非阻塞的，可以提高性能。
+- Cassandra：支持集群，支持ad hoc，对数据结构支持有限。
+- Memcached：基于内存的，支持分布式，但对复杂的数据类型支持较差。
+
 
 ### 关系型数据库
 - db-mysql：不支持事务操作
@@ -103,7 +112,15 @@ Node.js是一个JavaScript框架，一般的js脚本只能在浏览器运行，w
 
 
 ## Web框架
-[Express](./Express.md)：一个WEB框架，与`Connect`是同一个作者，框架本身提供了路由等中间件，用户也可以自定义中间件`(req, res, next) => {}`。
+最常见的Noed全栈开发形式是MEAN（MongoDB、Express、AngularJS、Node）。
+
+
+- [Express](./Express.md)：一个WEB框架，与`Connect`是同一个作者，框架本身提供了路由等中间件，用户也可以自定义中间件`(req, res, next) => {}`，
+  - `express-generator`：Express程序脚手架。
+- AngularJS：提供了数据双向绑定，MVC架构。
+- Ember
+- Backbone.js：MVP架构。
+- Dojo
 
 ```mermaid
 graph LR
@@ -111,7 +128,8 @@ graph LR
     B --> C[run route handler];
 ```
 
-常用的WEB中间件有：
+
+常用的WEB中间件（常与Express框架搭配）有：
 - [Connect](https://github.com/senchalabs/connect)：一个web中间件框架，集成了至少20个中间件。
   - connect.favicon
   - connect.logger
@@ -145,12 +163,13 @@ WebSockets：一种Web技术，可以在客户端与服务器之间建立直接�
 - socket
 
 
+
 ## 测试
 ### 测试框架
 - [Jest](https://jestjs.io)
-- [MOCHA](https://mochajs.org)
+- [MOCHA](https://mochajs.org)：Expresso的继承者。
 - Jasmine：测试文件结尾必须以*spec.js*结尾。
-- Vows
+- Vows：一个行为驱动开发（BDD）框架。
 
 
 ### 测试模块
@@ -166,7 +185,7 @@ WebSockets：一种Web技术，可以在客户端与服务器之间建立直接�
 
 
 ### 性能测试
-- ApacheBench
+- ApacheBench：既支持基准测试，也支持性能测试。
 - Nodeload
 
 

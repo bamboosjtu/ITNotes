@@ -15,6 +15,9 @@
 - [Moment.js](https://momentjs.com/)：功能强大的日期类库，有两个版本：一种支持时区，一种不支持。
 - [Numberal.js](http://numeraljs.com/)：格式化数字。
 - [seedrandom.js](https://github.com/davidbau/seedrandom)：js的伪随机数无法设置随机种子，本库可以使用随机种子来生成伪随机数。
+- [Mustache](https://github.com/janl/mustache.js)：模板系统。
+- qs.js：提供更强大的URL参数解析功能。
+
 
 
 ## 服务端编程
@@ -23,6 +26,7 @@
 ### 服务端框架
 - Express
 - Koa
+
 
 
 ## 用户端编程

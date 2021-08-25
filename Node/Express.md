@@ -76,9 +76,11 @@ app.get('/about', (req, res) => {
  ```
 
 
-- Jade：`Express`默认的模板系统。
+- Pug（原Jade）：`Express`默认的模板系统。
 
 - EJS（Embeded Javascript）：基于`Ruby EJB`的模板系统
+
+- Mustache
 
 模板引擎除了`tag`语法外，一般还包括`filter`等功能。
 
