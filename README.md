@@ -21,3 +21,33 @@
 - [Memcached](https://memcached.org/)：主要用于缓存数据请求，在内存中快速存取，但对复杂数据类型的支持比较有限，支持分布式。
 - [Cassandra](https://cassandra.apache.org/)：支持集群和ad hoc，但对复杂数据结构支持有限，
 - [Redis](https://redis.io/)：支持持久性存储，仅用于单机？
+
+
+## DevOps
+- 版本管理
+    - 代码及其分支管理
+    - 数据库模式和数据管理
+    - 配置文件管理
+    - 依赖关系管理
+
+### 数据库管理
+数据库迁移工具有：
+- Migration（Ruby on Rails）
+- south（Django）
+- Migrations Plugin（CachePHP）
+- Evolution（Play Framework）
+- Flyway
+- Liquibase
+- dbdeploy
+
+
+### 依赖管理
+- JVM语言:Maven（中央仓库）、Sonatype（中央仓库镜像）
+    - Apache Ant
+    - Maven
+    - sbt
+    - Gradle
+- CPAN：Perl
+- PyPI：Python
+- RubyGems：Ruby
+- npm：Node.js

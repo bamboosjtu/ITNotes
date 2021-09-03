@@ -19,8 +19,8 @@
 
 
 ## 网络
-- HTTP
-    - Websocket
+- HTTP：是基于TCP/IP通信协议通过万维网服务器传输数据到本地浏览器的应用层协议。
+- Websocket：是由HTML5规范提出的一种在单个TCP连接上进行全双工通信的应用层协议。
 - WebAPI
     - OpenAPI
     - RemoteAPI
