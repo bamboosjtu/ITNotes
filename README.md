@@ -30,6 +30,7 @@
     - 配置文件管理
     - 依赖关系管理
 
+
 ### 数据库管理
 数据库迁移工具有：
 - Migration（Ruby on Rails）
@@ -51,3 +52,13 @@
 - PyPI：Python
 - RubyGems：Ruby
 - npm：Node.js
+
+
+### 缺陷管理
+一般还具备bug管理、代码管理、Wiki等功能。
+
+- [Trac](https://trac.edgewall.org/)：基于Python。
+- [Redmine](https://www.redmine.org/)，基于Ruby on Rails。
+- [Bugzilla](https://www.bugzilla.org/)：基于Perl。
+- [Mantis](https://www.mantisbt.org/)：基于PHP。
+- 商用产品：`JIRA`、`YouTRACK`、`Pivotal Tracker`、`Backlog`、`GITHUB`等SaaS产品。
