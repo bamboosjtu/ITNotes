@@ -103,6 +103,14 @@ Build工具有：make、SCons、Ant、Maven、Gradle、Rake。
 - Findbugs：善于检查潜在的bug。
 
 
+### 持续部署
+1. 引导（Bootstraping）：服务器OS的配置及基于虚拟机的服务器安装自动化的相关工具。工具有Vagrant、Cobbler、AWS、Kickstart、Vmware。
+2. 配置（Configuration）：服务器及中间件的配置自动化工具。工具有Puppet、Boxen、Chef、serverspec。 
+3. 编排（Orchestration）：代码部署及发布相关的服务器操作等自动化工具。工具有Capistrano、Fabric。
+
+目前似乎docker才是主流。
+
+
 
 ## 测试框架
 
