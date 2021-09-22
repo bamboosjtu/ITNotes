@@ -17,6 +17,7 @@
 - [seedrandom.js](https://github.com/davidbau/seedrandom)：js的伪随机数无法设置随机种子，本库可以使用随机种子来生成伪随机数。
 - [Mustache](https://github.com/janl/mustache.js)：模板系统。
 - qs.js：提供更强大的URL参数解析功能。
+- MediaElement.js：嵌入能播放MP4视频的Flash备用播放器，使得HTML5的音视频兼容旧浏览器。
 
 
 
