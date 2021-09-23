@@ -40,8 +40,12 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 
 #### 4. 关系型
 - ForeignKey
-- OneToOneField：在外键字段上加unique
-- ManyToManyField：会创建中间表
+
+- OneToOneField
+在外键字段上加unique
+
+- ManyToManyField
+会创建中间表
 
 
 
@@ -66,6 +70,7 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 | **validators** | 设置校验逻辑，仅用于form。 |
 
 
+
 ### （三）字段验证
 模型字段中`validators`参数仅用于form，无法校验shell输入的记录。
 
@@ -74,29 +79,44 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 - 用户自定义
 
 
+
 ## 二、模型
 
 ### （一）Model
 一个模型对应一张数据库表，`django.db.models.Model`的内部类`Meta`用于配置模型或者表。
 
-- `ordering`：排序的字段。
-- `verbose_name`、`verbose_name_plural`，在后台显示的模型名称。
-- `unique_together`
-- `db_table`：对应的数据库表，默认为`<app_name>_<model_name>`
-- `abstract`
+- `ordering`
+排序的字段。
 
-Django提供了抽象类的功能。
+- `verbose_name`、`verbose_name_plural`
+在后台显示的模型名称。
+
+- `unique_together`
+
+- `db_table`
+对应的数据库表，默认为`<app_name>_<model_name>`
+
+- `abstract`
+Django提供了抽象类的功能，为True时，当前模型成为抽象类。
+
+- `indexes`
+定义数据库索引。
+
+- `unique_together`
+为数据库表设置联合主键，可以设置多个。
+
+
 
 ### （二）Model Manager
+
+通过Manager模型才可以操作数据库，默认情况下Django会为每个模型提供一个名为objects的Manager实例，Manager属性只能通过模型访问。
 
 ```mermaid
 graph LR
 DB_VALUE --> ModelManger((QuerySet.filter)) --> USER_FACING_VALUE
 ```
 
-
 继承自`django.db.models.Manager`类，可作为数据在数据库与用户之间的转换，通过模型的`objects`字段配置。一般与自定义的`QuerySet`配合使用。
-
 
 ```python
 class ProductQuerySet(models.QuerySet):
@@ -118,15 +138,37 @@ class ProductManager(models.Manager):
 class Product(models.Model):
   ...
   objects = ProductManager()
+  # 自定义Manager属性
+  products = models.Manager()
   ...
 ```
 
+
+#### 直接执行SQL
+- `manager.raw(sql)`
+本方法可以执行原生的SQL语句，并返回Django模型的实例。
+
+- `django.db.connection`
+该对象提供了数据库连接操作，使用`conection.cursor()`可以得到一个游标对象，`cursor.execute(sql, [params])`执行SQL语句，`cursor.callproc(procudure, params)`执行存储过程。
+
+
+### （三）增删改查
+Django通过模型以及QuerySet API为用户提供数据库操作方法。
+
+| 数据库操作 | Django代码 |
+|-----------|------------|
+| CREATE | save |
+| READ   | get等 |
+| UPDATE | 修改属性 |
+| DELETE | delete |
 
 
 ## 三、QuerySet
 数据库有数据操作语言DML，可以通过SQL语句进行CRUD操作，在Models对数据库的查询和更新交互通过QuerySet完成，Models可以看成是中间件，具体操作接口可参考[这里](https://docs.djangoproject.com/en/3.2/ref/models/querysets/)。
 
 QuerySet可进行链式操作，需要时才会真正执行DML语句。
+
+第一次创建QuerySet对象时，Django不会生成缓存，但当第一次执行时，会将查询结果缓存，后续查询可以使用当前的缓存内容。
 
 ### （一）链式调用接口
 - all
@@ -156,7 +198,7 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - values_list：查看查询结果列表
 
 
-### （三）查询操作符
+### （三）查询条件
 常用于filter接口的参数，*字段名*与*参数*之间通过`__`相连。
 
 - contains
@@ -174,6 +216,11 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - lte
 - range
 - count
+- isnull
+- time
+- quarter
+- regex
+- *外键属性*
 
 
 ### （四）特殊接口
@@ -186,7 +233,7 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 ### （五）高级查询
 - Q表达式用于OR查询。
 
-- F表达式用来执行数据库层面的计算，从而避免多线程竞争。
+- F表达式可以执行数据库层面的计算，从而避免多线程竞争，并可以比较不同字段。
 
 - 聚合查询
   - Count
@@ -200,6 +247,13 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - aggregate：直接计算结果。
 
 - raw：原生SQL接口
+
+
+### （六）反向查询
+多对一、多对多的反向查询可以通过`<related_model>_set`的属性。
+
+一对一的反向查询通过`<related_model>`的属性。
+
 
 
 ## 四、字段验证（validators）
