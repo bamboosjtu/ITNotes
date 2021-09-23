@@ -17,26 +17,32 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 | PositiveIntegerField | int(11) | 非负整数 |
 | SmallIntegerField | smallint | 小整数 |
 
+
 #### 2. 字符型
 | Model字段类型 | MySQL数据类型 | 备注 |
 |--------------|--------------|------|
 | CharField | varchar |  |
-| TextField | longtext | 常用于存档大量文本 |
+| TextField | longtext | 常用于存档超长文本 |
+| SlugField |  | 实现了对新闻文本的特殊处理 |
 | URLField | varchar | 实现了对URL的特殊处理 |
 | UUIDField | char(32) | 在PostgreSQL中使用uuid类型 |
 | EmailField | varchar | 实现了对email的特殊处理 |
 | FileField | varchar | 实现了对文件的特殊处理 |
+| FilePathField | | 实现了对路径的特殊处理 |
 | ImageField | varchar | 实现了对图片的特殊处理 |
+
 
 #### 3. 日期型
 - DateField
 - DateTimeField
 - TimeField
 
+
 #### 4. 关系型
 - ForeignKey
 - OneToOneField：在外键字段上加unique
 - ManyToManyField：会创建中间表
+
 
 
 ### （二）字段参数
