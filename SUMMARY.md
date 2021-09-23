@@ -14,6 +14,7 @@
 * [Django](./Django/README.md)
     * [QuickStart](./Django/Quickstart.md) 
     * [Django命令行](./Django/Command.md)
+    * [Django URL](./Django/URL.md)
     * [Django Model](./Django/Model.md)
     * [Reference](./Django/Reference.md)
     * [附录A：环境配置](./Django/Django_环境配置.md)
