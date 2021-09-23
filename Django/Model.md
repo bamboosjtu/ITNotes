@@ -1,4 +1,4 @@
-# Django Model简介
+# Django Model
 
 ORM是代码（软件）层面对于数据库和关系的一种抽象。Django的Model是ORM的一个具体实现。
 
