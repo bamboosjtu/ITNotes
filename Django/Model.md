@@ -62,10 +62,10 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 | error_messages | 自定义字段值校验失败的异常提示 |
 | help_text | 字段提示语 |
 | primary_key | 主键，只允许设置一个字段为主键 |
-| unique ||
-| unique_for_date | |
-| unique_for_month | |
-| unique_for_year | |
+| unique | 唯一约束 |
+| unique_for_date | 针对日期的联合约束 |
+| unique_for_month | 针对月份的联合约束 |
+| unique_for_year | 针对年份的联合约束 |
 | verbose_name | 后台显示名称 |
 | **validators** | 设置校验逻辑，仅用于form。 |
 
@@ -153,7 +153,7 @@ class Product(models.Model):
 
 
 ### （三）增删改查
-Django通过模型以及QuerySet API为用户提供数据库操作方法。
+Django通过模型以及QuerySet API为用户提供数据库操作方法，通过模型objects属性的all()方法可以得到QuerySet对象。
 
 | 数据库操作 | Django代码 |
 |-----------|------------|
@@ -195,7 +195,7 @@ QuerySet可进行链式操作，需要时才会真正执行DML语句。
 - bluk_create
 - in_buld
 - values
-- values_list：查看查询结果列表
+- values_list：返回包含tuple的QuerySet。
 
 
 ### （三）查询条件
