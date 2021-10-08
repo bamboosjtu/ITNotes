@@ -1,7 +1,7 @@
 # Django Quickstart
 
-## 环境配置
-### Django环境
+## 一、环境配置
+### （一）Django环境
 ```bash
 pip install pipenv
 pipenv shell
@@ -39,7 +39,7 @@ python manage.py startapp student
     └── views.py
 ```
 
-### 数据库环境
+### （二）数据库环境
 Django默认使用sqlite3数据库，但实际工程环境一般使用mysql或者postgresql等。
 （待续）
 
@@ -85,14 +85,14 @@ python manage.py dbshell
 ```
 
 
-## 编写代码
+## 二、编写代码
 Django的[官方文档入门教程](https://docs.djangoproject.com/en/3.1/intro/overview/)还是很全面的，讲解了后端和前端的基本代码，最基本的后台一般包括实现数据库ORM的Model（models.py），以及管理后台admin（admin.py），最基本的前台，包括网站的两级路由配置（urls.py），视图层实现业务逻辑（views.py），以及模板层提供html页面（templates/*.html）。
 
 
-### 后端开发
+### （一）后端开发
 Django的后端包括Model层和admin管理后台。
 
-#### ORM层（models.py）
+#### 1. ORM层（models.py）
 Django的Model API包括**字段选项**和**字段类型**两个部分，详情见[Model官方文档](https://docs.djangoproject.com/en/3.2/ref/models/fields/)。
 
 
@@ -130,7 +130,7 @@ class Student(models.Model):
 ```
 
 
-#### 管理后台（admin.py）
+#### 2. 管理后台（admin.py）
 为快速开发，一般会为每个模型注册一个管理后台，以便直接操作数据库，具体可以参考下[ModelAdmin options](https://docs.djangoproject.com/en/3.2/ref/contrib/admin/#modeladmin-options)。
 
 - 后台列表页的url为/admin/*model*/*model*
@@ -174,10 +174,11 @@ admin.site.register(Student, StudentAdmin)
 ```
 
 
-### 前台开发
+
+### （二）前台开发
 Django的前台展示数据主要是靠Template层渲染View层，使用DRF时没有Template层，而提交数据使用Form层。
 
-#### 网站路由（urls.py）
+#### 1. 网站路由（urls.py）
 Django的路由是串联的两级，第一级是站点文件夹内的urls.py，第二级是各个APP文件夹内的urls.py，两级是url要拼接在一起，并且从上往下匹配，可以最下面会放一个404的路由，可参考[官方文档的例子](https://docs.djangoproject.com/en/3.2/topics/http/urls/#example)。
 
 ```python
@@ -193,7 +194,7 @@ urlpatterns = [
 ```
 
 
-#### 业务逻辑层（views.py）
+#### 2. 业务逻辑层（views.py）
 网站路由把访问的url与处理的业务逻辑挂钩，可以[基于函数](https://docs.djangoproject.com/en/3.2/topics/http/views/)，也可以[基于类](https://docs.djangoproject.com/en/3.2/topics/class-based-views/)。业务逻辑层的输入是request，函数或类实例根据业务逻辑进行加工，并输出response。在DRF的前后端分离模式下，response是一个json或xml，而在单体应用下，response是一个html。
 
 ```python
@@ -257,15 +258,17 @@ class Index(View):
         return render(request, self.template_name, context=context)
 ```
 
-#### 页面显示层（templates/*.html）
+
+#### 3. 页面显示层（templates/*.html）
 这里会用到django自创的模板命令，此外，django的模板引擎还可以换成Jinja2，[模型字段的引用可以参考官方文档](https://docs.djangoproject.com/en/3.2/ref/models/instances/)。视图通过调用`render(request, template_name, context)`函数，来渲染模板，从而得到response。
 
 
-#### 表单输入（forms.py）
+#### 4. 表单输入（forms.py）
 Django可以事先定义好表单，然后在模板中使用。表单既可以继承自forms.Form类，[字段设置参考这里](https://docs.djangoproject.com/en/3.2/ref/forms/fields/)，也可以继承自forms.ModelForm，直接复用Model的代码，[详情可参考官方文档](https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/)。此外，django的表单还可以[对输入的数据进行校验](https://docs.djangoproject.com/en/3.2/ref/forms/validation/#cleaning-a-specific-field-attribute)。
 
 
-### 中间件
+
+### （三）中间件
 Django的中间件在前端/后端之前被调用，而且会用于所有的请求/响应，Django框架提供了`django.utils.deprecaion.MiddlewareMixin`类以便于用户自定义站点的中间件。
 
 `MiddlewareMixin`的接口按顺序包括：
@@ -313,7 +316,8 @@ class TimeItMiddleware(MiddlewareMixin):
 ```
 
 
-### 测试
+
+### （四）测试
 Django提供了一个`django.test.TestCase`的基类，开发者可以继承此类来实现自己的单元测试，如果不涉及数据库（测试数据与生产数据是隔离的），则可以使用`SimpleTestCase`作为基类，测试类提供的接口包括：
 1. `setUp(self)`：初始化环境。
 2. `test_xxxx(self)`：待测试的方法，均会被执行。

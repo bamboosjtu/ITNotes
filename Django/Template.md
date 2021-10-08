@@ -1,12 +1,12 @@
 # Django模板
 
-## 模板引擎
+## 一、模板引擎
 - Django Template Language
 - Jinjia
 
 
 
-## 模板使用
+## 二、模板使用
 
 
 加载模板：
@@ -18,7 +18,7 @@
 - `django.template.loader.render_to_string`
 
 
-## 模板语法
+## 三、模板语法
 
 标签和过滤器都可以自定义，放在应用的templatetags目录下。
 

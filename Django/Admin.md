@@ -6,8 +6,8 @@ site可以通过`django.contrib.admin.AdminSite`进行自定义。
 admin是基于Django内置功能开发的，结合了Template、Form、Model和View这些模块，也是MTV模式。
 
 
-## 页面
-### 列表页
+## 一、页面
+### （一）列表页
 - list_display：配置列表页所展示的字段。
 
 - list_display_links：配置那些字段可作为链接。
@@ -26,7 +26,7 @@ admin是基于Django内置功能开发的，结合了Template、Form、Model和V
 
 
 
-### 编辑页
+### （二）编辑页
 - exclude: 编辑页不需填写的字段。
 
 - fields：编辑页所需填写的字段，不能与fieldsets同时设置。
@@ -49,7 +49,7 @@ admin是基于Django内置功能开发的，结合了Template、Form、Model和V
 
 
 
-## 交互
+## 二、交互
 - `save_model(self, request, obj, form, change)`：点击保存按钮后，数据库操作前的一些处理，obj是当前要保存的对象，form是页面提交过来的表单，change标志本次保存的数据是新增的还是更新的。
 
 - `get_queryset(self, request)`：获取管理后台展示的数据。
@@ -68,7 +68,7 @@ admin是基于Django内置功能开发的，结合了Template、Form、Model和V
 
 
 
-## 静态资源
+## 三、静态资源
 通过`Media`内部类自定义静态资源，为管理后台引入JavaScript和CSS资源。
 
 ```python
@@ -84,7 +84,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 
-## 日志
+## 四、日志
 ModelAdmin自带日志记录功能，新建或修改实体时，ModelAdmin都会帮忙调用`django.contrib.admin.models.LogEntry`来创建一条日志，记录变更，具体代码位于`django/contrib/admin/options.py`。
 
 - `log_addition(self, request, object, message)`：记录新增

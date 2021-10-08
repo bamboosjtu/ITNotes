@@ -13,7 +13,7 @@
 * [Vue.js](./Vue/README.md)
 * [Django](./Django/README.md)
     * [QuickStart](./Django/Quickstart.md) 
-    * [Django命令行](./Django/Command.md)
+    * [Django 命令行](./Django/Command.md)
     * [Django 路由](./Django/URL.md)
     * [Django 视图](./Django/View.md)
     * [Django 表单](./Django/Form.md)
