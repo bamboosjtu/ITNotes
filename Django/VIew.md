@@ -1,5 +1,20 @@
 # Django视图
 
+Django的视图主要分为`function view`和`class-base view`。
+
+View处理请求的逻辑：
+1. 调用dispatch进行分发
+2. 调用get/post等方法：
+    1. 调用get_queryset方法，拿到数据源
+    2. 调用get_context_data方法，拿到上下文数据
+        1. 调用get_paginate_by拿到每页数据
+        2. 调用get_context_object_name拿到上下文中queryset数据的名称
+        3. 调用paginate_queryset进行分页处理
+        4. 将拿到的数据转为dict返回
+    3. 调用render_to_response渲染页面
+        1. 调用get_template_names获取模板名
+        2. 把request, context, template_name传递到模板中
+
 
 ## 一、视图基础
 ### （一）快捷方式
@@ -211,14 +226,19 @@ class FileFieldView(FormView):
 
 ## 四、视图类
 
+代码的逻辑被重复使用，且数据需要被共享时，可以考虑使用视图类。
+
+- 视图类
+`django.views.View`，能够接受请求并返回响应的可调用对象，实现了基于HTTP方法的分发逻辑，需要自行实现get方法或post方法。
+
 - 模板视图
-`django.views.generic.TemplateView`
+`django.views.generic.TemplateView`，继承自View，可以直接用来返回指定模板，实现了get方法，可以传递变量到模板中来进行数据展示。
 
 - 列表视图
-`django.views.generic.ListView`
+`django.views.generic.ListView`，继承自View，实现了get方法，可以绑定模板来批量获取数据。自带paginator组件，通过paginate_by属性设置每一个条目数，为上下文提供一个page_obj属性供模板渲染。
 
-- 查询视图
-`django.views.generic.edit.DetailView`
+- 详情视图
+`django.views.generic.edit.DetailView`，继承自View，实现了get方法，可以绑定模板来获取单个实例的数据，需要路由提供pk参数。
 
 - 提交视图
 `django.views.generic.edit.CreateView`
@@ -236,8 +256,28 @@ class FileFieldView(FormView):
 | 通用视图属性&方法 | 说明 |
 |-------------|------|
 | model | 使用的模型 |
+| queryset | 与model二选一，设定基础的数据集，相比model有过滤功能 |
+| kwargs | 路由传递的参数字典 |
+| pk_url_kwarg | DetailView需要的pk参数的别名 |
 | template_name | 模板文件名 |
 | context_object_name | 上下文对象名 |
-| get_context_data() | 获取上下文对象 |
-| get_queryset() | 查询模型 |
-| as_view() | url的第二个参数 |
+| get_context_data() | 获取上下文对象，如果有新增数据需要传递到模板中，可以重写本方法 |
+| get_queryset() | 查询模型，如果设定了queryset会直接返回queryset |
+| get_object() | 根据URL参数，从queryset上获取对应的实例 |
+| as_view() | url的第二个参数，提供视图函数 |
+
+
+```python
+# 视图类的伪代码
+class View:
+    @classmethod
+    def as_view(cls, **initkwargs):
+        def view(request, *args, **kwargs):
+            self = cls(**initkwars)
+            handler = getattr(self, request.method.lower())
+            if handler:
+                return handler(request)
+            else:
+                raise Exception('Method Not Allowed!)
+        return view
+```

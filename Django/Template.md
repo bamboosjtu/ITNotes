@@ -7,13 +7,15 @@
 
 
 ## 模板使用
+
+
 加载模板：
 - get_template(template_name, using=None)
 - select_template(template_name_list, using=None)
 
 模板渲染：
 - render
-
+- `django.template.loader.render_to_string`
 
 
 ## 模板语法
