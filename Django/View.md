@@ -3,16 +3,26 @@
 Django的视图主要分为`function view`和`class-base view`。
 
 View处理请求的逻辑：
-1. 调用dispatch进行分发
-2. 调用get/post等方法：
+1.调用dispatch进行分发
+
+2.调用get/post等方法
+
     1. 调用get_queryset方法，拿到数据源
+
     2. 调用get_context_data方法，拿到上下文数据
+
         1. 调用get_paginate_by拿到每页数据
+
         2. 调用get_context_object_name拿到上下文中queryset数据的名称
+
         3. 调用paginate_queryset进行分页处理
+
         4. 将拿到的数据转为dict返回
+
     3. 调用render_to_response渲染页面
+
         1. 调用get_template_names获取模板名
+        
         2. 把request, context, template_name传递到模板中
 
 
