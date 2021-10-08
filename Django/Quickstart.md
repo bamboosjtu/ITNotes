@@ -272,10 +272,15 @@ Django可以事先定义好表单，然后在模板中使用。表单既可以�
 Django的中间件在前端/后端之前被调用，而且会用于所有的请求/响应，Django框架提供了`django.utils.deprecaion.MiddlewareMixin`类以便于用户自定义站点的中间件。
 
 `MiddlewareMixin`的接口按顺序包括：
+
 1. `process_request(self, request)`：返回None才会执行后续的方法和中间件，返回HttpResonse则不会。
+
 2. `process_view(self, request, func, *args, **kwargs)`
+
 3. `process_exception(self, request, exception)`：视图层业务处理或者模板层渲染发生异常时才会调用。
+
 4. `process_template_response(self, request, response)`：使用了模板才会调用。
+
 5. `process_response(self, request, response)`
 
 `process_response`似乎一定会被调用，但`process_view`等则不一定，例如不涉及业务处理，仅仅刷新页面的时候。
@@ -319,9 +324,13 @@ class TimeItMiddleware(MiddlewareMixin):
 
 ### （四）测试
 Django提供了一个`django.test.TestCase`的基类，开发者可以继承此类来实现自己的单元测试，如果不涉及数据库（测试数据与生产数据是隔离的），则可以使用`SimpleTestCase`作为基类，测试类提供的接口包括：
+
 1. `setUp(self)`：初始化环境。
+
 2. `test_xxxx(self)`：待测试的方法，均会被执行。
+
 3. `tearDown(self)`：清理测试环境。
+
 
 ```python
 from django.forms.fields import EmailField
