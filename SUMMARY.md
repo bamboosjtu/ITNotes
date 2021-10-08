@@ -15,7 +15,7 @@
     * [QuickStart](./Django/Quickstart.md) 
     * [Django 命令行](./Django/Command.md)
     * [Django 路由](./Django/URL.md)
-    * [Django 视图](./Django/Views.md)
+    * [Django 业务逻辑](./Django/View.md)
     * [Django 表单](./Django/Form.md)
     * [Django 数据模型](./Django/Model.md)
     * [Django 页面模板](./Django/Template.md)
