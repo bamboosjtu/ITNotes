@@ -126,6 +126,17 @@ URL配置的根位置。
 优先使用WWW作为URL前缀。
 
 
+### （十）静态资源
+- STATIC_ROOT
+用来配置部署后的静态资源路径，Django提供了`collectstatic`命令来收集所有的静态资源到STATIC_ROOT配置目录，并可以通过Nginx这样的软件来配置静态资源路径。
+
+- STATIC_URL
+用来配置页面上静态资源的起始路径。
+
+- STATICFILES_DIRS
+用来指定静态资源所在的目录，执行`collectstatic`命令时，会去这些目录下查找。
+
+
 
 ## 二、第三方软件安装
 
