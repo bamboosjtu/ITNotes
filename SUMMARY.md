@@ -21,6 +21,7 @@
     * [Django 数据模型](./Django/Model.md)
     * [Django 页面模板](./Django/Template.md)
     * [Django 管理后台](./Django/Admin.md)
+    * [Django 中间件](./Django/Middleware.md)
     * [Reference](./Django/Reference.md)
     * [附录A：环境配置](./Django/Django_环境配置.md)
     * [附录B：工具软件](./Django/Django_工具软件.md)
