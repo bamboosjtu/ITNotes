@@ -85,26 +85,28 @@ ORM是代码（软件）层面对于数据库和关系的一种抽象。Django�
 ### （一）Model
 一个模型对应一张数据库表，`django.db.models.Model`的内部类`Meta`用于配置模型或者表。
 
-- `ordering`
+- `ordering`：
 排序的字段。
 
-- `verbose_name`、`verbose_name_plural`
+- `verbose_name`、`verbose_name_plural`：
 在后台显示的模型名称。
 
-- `unique_together`
+- `unique_together`：
 
-- `db_table`
-对应的数据库表，默认为`<app_name>_<model_name>`
+- `db_table`：
+对应的数据库表，默认为`<app_name>_<model_name>`。
 
-- `abstract`
+- `abstract`：
 Django提供了抽象类的功能，为True时，当前模型成为抽象类。
 
-- `indexes`
+- `indexes`：
 定义数据库索引。
 
-- `unique_together`
+- `unique_together`：
 为数据库表设置联合主键，可以设置多个。
 
+- `save`方法：
+保存记录到数据库，可以重载。
 
 
 ### （二）Model Manager

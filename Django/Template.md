@@ -33,3 +33,24 @@ block、comment、cycle、extends、for、if、include、load、now、url、with
 - 人性化语义标签
 先在INSATLLED_APPS中注册`django.contrib.humanize`，apnumber、intcomma、intword、naturalday、naturaltime、ordinal。
 
+
+## 四、自定义标签
+在App下的templatetags可以自定义标签。
+
+```python
+from django import template
+
+from comment.forms import CommentForm
+from comment.models import Comment
+
+register = template.Library()
+
+@register.inclusion_tag("comment/block.html")
+def comment_block(target):
+    return {
+        "target": target,
+        "comment_form": CommentForm(),
+        "comment_list": Comment.get_by_target(target),   
+    }
+```
+
