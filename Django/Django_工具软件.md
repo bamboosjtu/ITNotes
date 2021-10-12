@@ -22,3 +22,20 @@
 - gevent
 - greenlet
 - gthread
+
+
+## 四、Django插件
+- xadmin：
+提供基于Bootstrap管理后台，但与Django 2以上的兼容性非常不好，需要大量修改。
+
+- django-autocomplete-light：
+提供自动补全功能。
+
+- django-rest-framework：
+提供Restful API功能。
+
+- django-ckeditor：
+提供富文本编辑器的功能。
+
+- django-haystack：
+提供基于haystack的搜索功能。
