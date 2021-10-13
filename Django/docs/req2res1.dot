@@ -1,0 +1,14 @@
+digraph G{
+    Graph[rankdir="LR"];
+    node[shape=record, height=.1, fontname="SimSun"];
+
+    req[label = "http请求"];
+    view[label = "view(form) \n 转换为form进行处理"];
+    model[label = "Model"];
+    
+    req -> view[style=bold];
+    view -> req[style=bold, label="text/html"];
+
+    view -> model[style=bold, label="form=Form(instance, request.POST)\nform.save()"];
+    model -> view[style=bold, label="Form(instance)"];
+}

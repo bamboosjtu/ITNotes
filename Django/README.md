@@ -80,5 +80,15 @@ graph RL;
 ```
 
 
+- 常规请求-响应模式
+
+![基于表单的响应](./docs/req2res1.png)
+
+- RESTful API
+
+![基于表单的响应](./docs/req2res2.png)
+
+
+
 ## 参考资料
 1. [WEB开发——Python WSGI协议详解](https://zhuanlan.zhihu.com/p/66586001)

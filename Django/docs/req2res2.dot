@@ -1,0 +1,14 @@
+digraph G{
+    Graph[rankdir="LR"];
+    node[shape=record, height=.1, fontname="SimSun"];
+
+    req[label = "http请求"];
+    api[label = "viewset(serializer) \n 转换为serializer进行处理"];
+    model[label = "Model"];
+    
+    req -> api[style=bold];
+    api -> req[style=bold, label="application/json"];
+
+    api -> model[style=bold, label="s=Serializer(instance, request.data)\ns.save()"];
+    model -> api[style=bold, label="Serializer(instance)"];
+}
