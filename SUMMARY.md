@@ -18,7 +18,7 @@
     * [Django 路由](./Django/URL.md)
     * [Django 业务逻辑](./Django/View.md)
     * [Django 表单](./Django/Form.md)
-    * [Django RESTful API](./Django/API.md)
+    * [Django RESTful API](./Django/APIs.md)
     * [Django 数据模型](./Django/Model.md)
     * [Django 页面模板](./Django/Template.md)
     * [Django 管理后台](./Django/Admin.md)

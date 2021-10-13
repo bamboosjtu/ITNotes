@@ -39,3 +39,6 @@
 
 - django-haystack：
 提供基于haystack的搜索功能。
+
+- django-debug-toobar
+排查性能，优化项目。
