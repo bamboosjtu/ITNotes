@@ -40,11 +40,14 @@
 - django-haystack：
 提供基于haystack的搜索功能。
 
-- django-debug-toobar
+- django-debug-toobar：
 排查性能，优化项目，还可以在此基础上继续开发面板，如djdt_flamegraph（函数调用耗时）、pympler（内存使用情况）、line-profiler（行级性能分析）等。
 
-- silk
+- silk：
 jazzband组织下的东西，有django插件可用于分析项目性能。
 
-- django-redie
+- django-redis：
 提供redis缓存功能，一般还会配合`hiredis`以增强性能。
+
+- django-simple-captcha：
+提供验证码功能。

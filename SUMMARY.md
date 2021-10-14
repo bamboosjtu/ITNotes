@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [软件需求](./SRS/SRS.md)
 * [Web](./Web/README.md)
     * [WebAPI](./Web/WebAPI.md)
     * [JavaScript简介](./Web/JavaScript.md)
