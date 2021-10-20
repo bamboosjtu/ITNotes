@@ -147,3 +147,75 @@ Bootstrap3默认定义了4种媒体查询的大小：
 | .info             | 将表格元素的背景更改为蓝色，表示信息                         |
 | .warning          | 将表格元素的背景更改为黄色，表示危险                         |
 | .danger           | 将表格元素的背景更改为红色，表示警告                         |
+
+
+
+## 五、表单
+
+Bootstrap需要把每组标签和控件封装在`.form-group`类中，并对控件本身添加`.form-control`类。
+
+通过`.form-control-static`类，可以给元素添加只读表单字段的效果。
+
+```html
+<form>
+    <div class="form-group">
+        <label for="firstName">First Name：</label>
+        <input type="text" autofocus required id="firstName" placeholder="First Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name：</label>
+        <input type="text" autofocus required id="lastName" placeholder="Last Name" class="form-control">
+    </div>
+</form>
+```
+
+
+
+### （一）表单样式
+
+| 样式     | 方法                                                         |
+| -------- | ------------------------------------------------------------ |
+| 水平表单 | 给`<form>`标签添加`.form-horizontal`类，给`<label>`元素添加`.control-label`类。 |
+| 内联表单 | 给`<form>`标签添加`.form-inline`类。                         |
+| 隐藏标签 | 给`<label>`元素添加`.sr-only`类。                            |
+
+
+
+### （二）input类型
+
+- checkbox，`.checkbox-inline`创建内联效果
+- radio，`.radio-inline`创建内联效果
+- color
+- date
+- week
+- month
+- datetime
+- datetime-local
+- email
+- tel
+- url
+- number
+- text
+- password
+- search
+
+
+
+### （三）表单类
+
+| 类               | 描述                                         |
+| ---------------- | -------------------------------------------- |
+| `.input-lg`      | 扩大控件。                                   |
+| `.input-sm`      | 缩小控件。                                   |
+| `.form-group-lg` | 扩大表单组所有元素大小。                     |
+| `.form-group-sm` | 缩小表单组所有元素大小。                     |
+| `.help-block`    | 定义描述表单字段的文本块（`<span>`等元素）。 |
+
+
+
+### （四）控件属性
+
+| 属性               | 说明                 |
+| ------------------ | -------------------- |
+| `aria-label`       | 虚拟标签？           |
+| `aria-describedby` | 定义元素的帮助块id。 |
