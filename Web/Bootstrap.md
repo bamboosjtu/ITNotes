@@ -745,10 +745,168 @@ $('body').scrollspy({target: "#myNav"});
 
 #### 2. 方法
 
-每当删除或添加DOM元素时候，需要调用.scrollspy('refresh')方法。
+每当删除或添加DOM元素时候，需要调用`.scrollspy('refresh')`方法。
 
 
 
 #### 3. 事件
 
 - activate.bs.scrollspy
+
+
+
+### （五）工具提示和弹出框
+
+工具提示（Tooltip）和弹出框（Popover）是出现在现有文本之上和周围的小内容块，使用tooltip.js和popover.js脚本。
+
+
+
+#### 1. 触发
+
+- 数据属性：添加`data-toggle="tooltip"`或`data-toggle="popover"`属性。
+
+- js脚本
+
+```js
+$('[data-toggle]="tooltip"').tooltip()
+$('[data-toggle]="popover"').popover()
+```
+
+
+
+#### 2. 选项
+
+| 选项                | 取值                           | 作用                                 |
+| ------------------- | ------------------------------ | ------------------------------------ |
+| animation           | true、false                    | 是否应用CSS淡入淡出效果              |
+| container           | 字符串或false                  | 为特定元素附加弹出框或工具提示       |
+| delay               | 数字或对象                     | 延迟的毫秒数                         |
+| html                | true、false                    | 是否允许将HTML插入弹出框或工具提示   |
+| template            |                                | 创建弹出框或工具提示的代码模板       |
+| placement           | top、right、bottom、left、auto | 定义显示弹出框或工具提示的位置       |
+| selector            | 字符串或false                  | 允许动态HTML元素添加弹出框或工具提示 |
+| title               | 字符串或函数                   | title属性未指定时的标题值            |
+| content（仅弹出框） | 字符串或函数                   |                                      |
+| trigger             | click、hover、focus、manual    | 设置触发方式                         |
+| viewport            | 字符串或对象                   | 设置弹出框或工具提示的范围           |
+
+
+
+#### 3. 事件
+
+- show.bs.tooltip、show.bs.popover
+- shown.bs.tooltip、shown.bs.popover
+- hide.bs.tooltip、hide.bs.popover
+- hidden.bs.tooltip、hidden.bs.popover
+
+
+
+### （六）按钮
+
+使用button.js脚本。
+
+
+
+- `$().button('toggle')`：切换按钮状态
+- `$().button('reset')`：重置按钮状态，将文本改回原始文本
+- `$().button(string)`：将按钮文本切换为由字符串定义的 data-* 属性。
+
+
+
+### （七）警告框
+
+使用alert.js脚本。警告框用`.alert`类和一个上下文类创建，上下文类有：
+
+- `.alert-success`
+- `.alert-info`
+- `.alert-warning`
+- `.alert-danger`
+
+
+
+如果希望读取警告框后撤销，需要添加`.alert-dismissible`类，并添加一个关闭按钮（需要具有`data-dismiss="alert"`属性）。
+
+
+
+### （八）进度条
+
+进度条通过创建包含`.progress`类的容器来构建，其中需要一个包含`.progress-bar`的容器。
+
+
+
+```html
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%:">
+        <span class="sr-only">20% Read</span>
+    </div>
+</div>
+```
+
+
+
+进度条的上下文类如下，此外还可以通过`progress-bar-striped`类添加条纹效果。
+
+- `.progress-bar-success`
+- `.progress-bar-info`
+- `.progress-bar-warning`
+- `.progress-bar-danger`
+
+
+
+### （九）折叠
+
+使用collapse.js脚本，同事需要安装Transition插件。
+
+
+
+#### 1. 普通折叠
+
+第一步是创建一个可折叠的容器，为容器添加`.collapse`类（如果是水平折叠，还要添加`.width`类），设置容器的id。
+
+第二步是创建触发按钮，添加`data-toggle="collapse"`和`data-target="#targetID"`属性。
+
+
+
+#### 2. 折叠面板
+
+折叠面板（Accordion）是多个可折叠的部分，当面板的某个部分打开时，其余部分自动关闭。主要通过collapse插件的data-parent属性实现。
+
+
+
+1. 创建一个带标题的面板（具有`.panel`类的容器），确保`.panel-heading`有唯一ID。
+2. 用一个`<div>`容器包裹`.panel-body`，设置`.panel-collapse`和`.collapse`类。
+3. 在`.panel-title`下创建链接`<a>`，并为链接添加`data-toggle="collapse"`和`data-parent="#myAccordion"`属性，从而创建触发器。
+4. 用容器包裹整个面板，设置`.panel-group`类，确保ID与步骤3的`#myAccordion`一致。
+5. 参考步骤1~3创建其他面板。
+
+
+
+### （十）轮播
+
+轮播包括轮播指标、幻灯片和控件三个部分，使用carousel.js脚本和Trasition插件。
+
+
+
+1. 创建轮播容器，设置`.carousel`类、唯一ID和`data-ride="carousel"属性。`
+2. 创建轮播指标（可选），这是一个设置为`.carousel-indicators`类的有序列表，每个列表项的`data-target`属性指向轮播容器的ID，`data-slide-to`包含幻灯片编号。
+3. 创建幻灯片，这是一个设置为`.carousel-inner`类的容器，包含多个`.item`类的容器（其中一个再加上`.active`类），容器中的内容幻灯片图像或者信息。
+4. 创建控件，这是放在轮播左右两侧的设置为`.carousel-control`类的`<a>`标签，，`href`属性指向轮播容器ID，往前翻页则添加`.left`类且`data-slide="prev"`，往后翻页则添加`.right`类且`data-slide=next`。
+
+
+
+
+
+## 七、可访问性
+
+| 属性             | 作用                   |
+| ---------------- | ---------------------- |
+| aria-controls    | 是否是控制元素         |
+| aria-describedby | 告诉AT描述性文本的位置 |
+| aria-expanded    | 是否是可扩展元素       |
+| aria-hidden      | 告诉AT是否隐藏         |
+| aria-invalid     | 告诉AT是否无效         |
+| aria-label       | 指向由其标记的元素ID   |
+| aria-labeledby   | 与aria-describedby类型 |
+| aria-pressed     | 告诉AT是否被按下或激活 |
+| role             | 告诉AT设备元素的目的   |
+| title            | 元素的标题             |
