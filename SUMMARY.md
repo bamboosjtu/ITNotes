@@ -6,7 +6,7 @@
     * [WebAPI](./Web/WebAPI.md)
     * [JavaScript简介](./Web/JavaScript.md)
     * [Bootstrap简介](./Web/Bootstrap.md)
-    * [Flask](./Web/Flask.md)
+    * [Flask简介](./Web/Flask.md)
     * [Reference](./Web/Reference.md)
 * [Vue.js](./Vue/README.md)
     * [不完全避坑指南](./Vue/QuickStart.md)
