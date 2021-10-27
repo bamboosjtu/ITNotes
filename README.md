@@ -3,13 +3,13 @@
 ## Web开发
 
 ### 前端
-    - Vue.js
-    - 微信小程序
+- Vue.js
+- 微信小程序
 
 ### 后端
-    - Django(Python)
-    - Flask(Python)
-    - Express(Node)
+- Django(Python)
+- Flask(Python)
+- Express(Node)
 
 
 
