@@ -13,6 +13,7 @@ Flask是一个微型框架，主要的三个依赖：路由、调试和WSGI由We
 - flask-sqlalchemy
 - flask-migrate
 - flask-mail
+- flask-login
 
 
 
@@ -220,6 +221,16 @@ def index():
 | EqualTo       | 比较两个字段的值，常用于再次输入密码 |
 | Regexp        | 字段必须满足正则表达式条件           |
 | Length        | 字段长度的要求                       |
+
+
+
+此外，FlaskForm还可以对自定义字段的验证函数，`validate_<fieldname>(self, field)`
+
+```python
+def validate_username(self, field):
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError('用户名已存在')
+```
 
 
 
@@ -557,3 +568,79 @@ with app.app_context():
 ├── requirements.txt
 └── flasky.py
 ```
+
+
+
+## 六、用户和密码
+
+为保护数据库中用户密码的安全，不应存储密码本身，而应存储密码的散列值（以密码为输入，添加随机内容——盐值后，再使用单向加密算法计算，最终得到一个和原始密码没有关系的字符序列，且无法还原成原始密码）。
+
+
+
+### （一）计算密码散列值
+
+可供选择的模块有：
+
+- werkzeug.security
+  - generate_password_hash(password, method="pbkdf2:sha256", salt_length=8)
+  - check_passsword_hash(hash, password)
+- bcrypt.passlib
+
+
+
+### （二）Flask-Login扩展
+
+#### 1. 用户模型
+
+Flask-login要求User对象必须实现以下属性或方法，且提供了UserMixin共User类继承。
+
+| 属性/方法        | 说明                                                         |
+| ---------------- | ------------------------------------------------------------ |
+| is_authenticated | 如果用户登录凭据有效，则返回True，否则返回False              |
+| is_active        | 如果允许用户登录，则返回True，否则返回False                  |
+| is_anoymous      | 对普通用户必须始终返回False，对表示匿名用户的特殊对象返回True |
+| get_id()         | 返回用户唯一标识符，用Unicode编码                            |
+
+此外，还要通过装饰器`@login_manager.user_loader`注册一个函数，返回已登录用户的id，详情如下。
+
+```python
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+```
+
+
+
+#### 2. 登录保护
+
+##### （1）装饰器
+
+Flask-login提供了一些装饰器保护路由。
+
+- @login_required：视图函数只能在用户登录状态下访问
+
+
+
+##### （2） 登录与注销
+
+在视图函数中可以是同以下方法进行用户登录和注销。
+
+- login_user(user, keepin:bool)
+- logout_user()
+
+
+
+用户登录成功后会把用户ID以字符串的形式写入用户会话，并把用户对象（未登录则为Anonymous实例）赋值给当前请求的current_user的上下文变量。
+
+
+
+#### 3. 生成令牌
+
+```python
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
+s = Serializer(current_app.config['SECKET_KEY'], expiration)
+token = s.dumps({'confirm': self.id})
+data = s.loads(token)
+```
+
