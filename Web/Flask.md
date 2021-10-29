@@ -86,6 +86,18 @@ Flask使用上下文临时把某些对象编程全局可访问，从而编写视
 
 
 
+可以通过装饰器注册应用上下文对象，如下
+
+```python
+@main.app_context_processor
+def inject_permissions():
+    return dict(Permission=Permission)
+```
+
+
+
+
+
 #### 2. 请求
 
 Flask通过上下文变量`request`对外开放请求对象。
