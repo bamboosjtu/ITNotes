@@ -14,6 +14,9 @@ Flask是一个微型框架，主要的三个依赖：路由、调试和WSGI由We
 - flask-migrate
 - flask-mail
 - flask-login
+- flask-pagedown
+- markdown
+- bleach
 
 
 
@@ -154,6 +157,12 @@ Flask通过上下文变量`request`对外开放请求对象。
 
 
 
+### （三）模板
+
+Flask使用的是Jinja2模板，可以自定义过滤器、宏、标记等。
+
+
+
 ### （四）表单
 
 flask-wtf包队独立的WTFormss进行了包装，可以提升Flask处理Web的能力，使用时不需要在应用层初始化，但是要配置一个密钥。
@@ -247,7 +256,7 @@ def validate_username(self, field):
 
 
 
-### （五）数据库ORM
+### （五）模型
 
 Flask-SQLAlchemy包扩展了Flask的ORM功能，在ORM模型中用`db.Column`定义字段。
 
@@ -388,6 +397,59 @@ Flask-Alchemy为每个模型类都提供了query对象用于查询。
 | offset()    | 偏移原查询返回的结果，返回一个新查询         |
 | order_by()  | 根据指定条件对原查询结果排序，返回一个新查询 |
 | group_by()  | 根据指定条件对原查询结果排序，返回一个新查询 |
+
+
+
+#### 5. 分页
+SQLAlechmy通过Pagination对象提供分页功能，调用query对象的paginate()方法可以得到分页对象。
+
+```python
+page = request.args.get('page', 1, type=int)
+pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
+                page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+                error_out=False)
+posts = pagination.items
+```
+
+分页对象有一系列的属性和方法：
+
+| 属性或方法                                                   | 说明                                             |
+| ------------------------------------------------------------ | ------------------------------------------------ |
+| items                                                        | 当前页面中的记录                                 |
+| query                                                        | 分页的源查询                                     |
+| page                                                         | 当前页数                                         |
+| prev_num                                                     | 上一页的页数                                     |
+| next_num                                                     | 下一页的页数                                     |
+| has_next                                                     | 如果有下一页，值为True                           |
+| has_prev                                                     | 如果有上一页，值为True                           |
+| pages                                                        | 查询的总页数                                     |
+| per_page                                                     | 每页显示的记录数量                               |
+| total                                                        | 查询返回的总记录数                               |
+| iter_pages(left_edge, left_current, right_current, right_edge) | 一个迭代器，返回一个在分页导航中显示的页数列表。 |
+| prev()                                                       | 上一页的分页对象                                 |
+| next()                                                       | 下一页的分页对象                                 |
+
+
+
+#### 6. 事件
+
+SqlAlchemy可以监听模型字段变化的事件。
+
+```python
+class Post(db.Model):
+    # ……
+    @staticmethod
+    def on_changed_body(target, value, oldvalue, initiator):
+        import bleach
+        from markdown import markdown
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 
+                        'strong', 'ul', 'h1', 'h2', 'h3', 'p']
+        target.body_html = bleach.linkify(bleach.clean(markdown(value, output_format='html'), 
+                                                       tags=allowed_tags, strip=True))
+        
+db.event.listen(Post.body, 'set', Post.on_changed_body)
+```
+
 
 
 
