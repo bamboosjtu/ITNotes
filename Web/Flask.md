@@ -14,9 +14,11 @@ Flask是一个微型框架，主要的三个依赖：路由、调试和WSGI由We
 - flask-migrate
 - flask-mail
 - flask-login
+- flask-httpauth
 - flask-pagedown
 - markdown
 - bleach
+- httpie
 
 
 
@@ -716,5 +718,176 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 s = Serializer(current_app.config['SECKET_KEY'], expiration)
 token = s.dumps({'confirm': self.id})
 data = s.loads(token)
+```
+
+
+
+## 七、RestfulApI
+
+### （一）HTTP状态码
+
+| HTTP状态码 | 名称               | 状态             | 说明                                   |
+| ---------- | ------------------ | ---------------- | -------------------------------------- |
+| 200        | OK                 | 成功             | 请求成功                               |
+| 201        | Created            | 已创建           | 请求成功，而且创建了一个资源           |
+| 202        | Accepted           | 已接收           | 请求已接收，但仍在处理中，将异步处理   |
+| 204        | No Content         | 没有内容         | 请求成功处理，但是返回的响应没有数据   |
+| 400        | Bad Request        | 错误请求         | 请求无效或者不一致                     |
+| 401        | Unauthorized       | 未授权           | 请求未包含身份验证信息或提供的凭据无效 |
+| 403        | Forbidden          | 禁止             | 请求中发送的身份验证凭据无权访问目标   |
+| 404        | Not Found          | 未找到           | URL对应的资源不存在                    |
+| 405        | Method Not Allowed | 不允许使用的方法 | 处理请求的过程发生意外的错误           |
+
+
+
+### （二）权限认证
+
+由于要支撑多种客户端，api编程无法通过cookie或者session保持用户状态，一般是通过`flask-httpauth`库来实现鉴权，状态保存在服务端的应用上下文`g`中。
+
+
+
+#### 1. **鉴权**
+
+```python
+from flask_httpauth import HTTPBasicAuth
+auth = HTTPBasicAuth()
+
+@auth.verify_password
+def verify_password(email_or_token, password):
+    if email_or_token == '':
+        return False
+    if password == '':
+        g.current_user = User.verify_auth_token(email_or_token)
+        g.token_used = True
+        return g.current_user is not None
+    user = User.query.filter_by(email=email_or_token).first()
+    if not user:
+        return False
+    g.current_user = user
+    g.token_used = False
+    return user.verify_password(password)
+```
+
+
+
+#### 2. 路由保护
+
+```python
+@auth.before_request
+@auth.login_required
+def before_request():
+    if not g.current_user.is_anonymous and not g.current_user.confirmed:
+        return forbidden('unconfirmed account')
+```
+
+
+
+#### 3. 错误处理
+
+```python
+@auth.error_handler
+def auth_error():
+    return unauthorized('Invalid Credintials')
+```
+
+
+
+
+
+### （三）序列化转换
+
+#### 1. 序列化
+
+- 给模型添加序列化方法
+
+```python
+# models.py
+class Comment(db.Model):
+    # ……
+    
+    def to_json(self):
+        json_comment = {
+            'url': url_for('api.get_comment', id=self.id),
+            'body': self.body,
+            'body_html': self.body_html,
+            'timestamp': self.timestamp,
+            'author_url': url_for('api.get_user', id=self.author_id),
+            'post_url': url_for('api.get_post', id=self.post_id),
+        }
+        return json_comment
+```
+
+
+
+- 实现端点
+
+```python
+from flask.json import jsonify
+
+@api.route('/comments/')
+def get_comments():
+    page = request.args.get('page', 1, type=int)
+    pagination = Comment.query.paginate(page, 
+                                        per_page=current_app.config['FLASKY_POSTS_PER_PAGE'], 
+                                        error_out=False)
+    comments = pagination.items()
+    prev = None
+    if pagination.has_prev:
+        prev = url_for('api.get_comments', page=page-1)
+    next = None
+    if pagination.has_next:
+        next = url_for('api.get_comments', page=page+1)
+    return jsonify({
+        'posts': [comment.to_json() for comment in comments],
+        'prev_url': prev,
+        'next_url': next,
+        'count': pagination.total
+    })
+```
+
+
+
+#### 2. 反序列化
+
+- 给模型添加反序列化方法
+
+```python
+class Post(db.Model):
+    # ……
+    
+    @staticmethod
+    def from_json(json_post):
+        body = json_post.get('body')
+        if body is None or body == '':
+            raise ValidationError('post does not have a body.')
+        return Post(body=body)
+```
+
+
+
+- 实现端点
+
+```python
+@api.route('/posts/', method=['POST'])
+@permission_required(Permission.WRITE)
+def new_post():
+    post = Post.from_json(request.json)
+    post.author = g.current_user
+    db.session.add(post)
+    db.session.commit()
+    return jsonify(post.to_json()), 201, {'Location': url_for('api.get_post', id=post.id)}
+```
+
+
+
+### （四）接口测试
+
+测试Web服务需要使用HTTP客户端，常用的工具有：
+
+- cURL
+- HTTPie
+
+```bash
+http --json --auth <email>:<password> GET http://127.0.0.1:5000/api/v1/posts
 ```
 
