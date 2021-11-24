@@ -15,10 +15,13 @@ Flask是一个微型框架，主要的三个依赖：路由、调试和WSGI由We
 - flask-mail
 - flask-login
 - flask-httpauth
+- flask-sslify
 - flask-pagedown
 - markdown
 - bleach
 - httpie
+- coverage
+- selenium
 
 
 
@@ -644,6 +647,27 @@ with app.app_context():
 ├── requirements.txt
 └── flasky.py
 ```
+
+
+
+- 测试环境准备
+
+```python
+def setUp(self) -> None:
+        self.app = create_app('testing')
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
+        Role.insert_roles()
+        self.client = self.app.test_client(use_cookies=True)
+        
+def tearDown(self) -> None:
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
+```
+
+
 
 
 
