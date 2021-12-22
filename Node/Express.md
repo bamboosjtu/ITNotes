@@ -11,7 +11,7 @@ npm install -d
 node app.js
 ```
 
-## 简单主文件
+## 简单示例
 
 ```js
 const path = require('path')
@@ -40,7 +40,43 @@ app.listen(3000, () => {
 
 
 ## 插件
-### 模板
+### 输入验证
+- Joi
+
+
+### 中间件（Middleware）
+中间件是一个函数`function(req, res, next)`，对HTTP请求和响应进行修改。
+
+- 自定义中间件
+```js
+app.use(function(req, res, next){
+    console.log('logging')
+    next()
+})
+``` 
+
+- 内置中间件
+```js
+app.use(express.json())
+app.use(express.urlencode())
+app.use(express.static('public'))
+```
+
+- 第三方中间件
+
+
+### 配置工具
+- rc
+- config
+
+
+
+### 调试工具
+- debug
+
+
+
+### 模板引擎
 - [hbs](https://www.npmjs.com/package/hbs)：`Express`的`handlerbars`，一个模板引擎，模板以`.hbs`为后缀，默认位置在`<project>/views/`文件夹下，但可以修改。
 
 ```js
@@ -86,7 +122,35 @@ app.get('/about', (req, res) => {
 
 
 
+### 数据库集成
+- mongoose
+
+
+
+### 鉴权（Authentication）
+
+
+
+### 路由（Router）
+```js
+// api.js
+const router = express.Router()
+
+modulue.exports = router
+
+// index.js
+const api = require('api.ks')
+app.use('/api', api)
+
+```
+
+
+
+
 ## 其他框架
 - `Express-Resource`提供了简化的MVC功能
 - `RailwayJS`基于`Express`，并仿照`Ruby on Rails`
 - `Tower.js`是一个完整支持MVC的Web框架
+
+
+
